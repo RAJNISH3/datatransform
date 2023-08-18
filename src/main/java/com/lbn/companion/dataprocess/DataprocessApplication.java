@@ -43,8 +43,6 @@ public class DataprocessApplication {
 
         Logger.getLogger("org")
                 .setLevel(Level.OFF);
-        Logger.getLogger("akka")
-                .setLevel(Level.OFF);
 
         Map<String, Object> kafkaParams = new HashMap<>();
         kafkaParams.put("bootstrap.servers", "localhost:9092");

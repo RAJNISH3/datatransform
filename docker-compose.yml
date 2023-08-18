@@ -36,7 +36,7 @@ services:
       context: ./dataprocess/target/
     depends_on:
       - kafka
-    command: ["java", "-jar", "dataprocess-0.0.1-SNAPSHOT.jar", "<your_app_arguments>"]
+    command: [ "java", "-jar", "dataprocess-0.0.1-SNAPSHOT.jar", "" ]
 
 networks:
   default:
