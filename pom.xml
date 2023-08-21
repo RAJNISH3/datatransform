@@ -15,96 +15,9 @@
     <description>Data process from kafka to casandra via spark</description>
     <dependencies>
         <dependency>
-            <groupId>org.springframework.kafka</groupId>
-            <artifactId>spring-kafka</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-to-slf4j</artifactId>
-            <version>2.20.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>2.14.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.32</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.4.7</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-docker-compose</artifactId>
-            <scope>runtime</scope>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-core_2.12</artifactId>
             <version>${org.apache.spark.spark-core.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>jul-to-slf4j</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>jcl-over-slf4j</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.apache.logging.log4j</groupId>
-                    <artifactId>log4j-slf4j-impl</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.apache.logging.log4j</groupId>
-                    <artifactId>log4j-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.apache.logging.log4j</groupId>
-                    <artifactId>log4j-core</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.apache.logging.log4j</groupId>
-                    <artifactId>log4j-1.2-api</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-sql_2.12</artifactId>
-            <version>${org.apache.spark.spark-sql.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-graphx_2.12</artifactId>
-            <version>${org.apache.spark.spark-graphx.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>graphframes</groupId>
-            <artifactId>graphframes</artifactId>
-            <version>${graphframes.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
@@ -113,53 +26,13 @@
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-mllib_2.12</artifactId>
-            <version>${org.apache.spark.spark-mllib.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.spark</groupId>
             <artifactId>spark-streaming-kafka-0-10_2.12</artifactId>
             <version>${org.apache.spark.spark-streaming-kafka.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.datastax.spark</groupId>
-            <artifactId>spark-cassandra-connector_2.12</artifactId>
-            <version>${com.datastax.spark.spark-cassandra-connector.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.datastax.spark</groupId>
-            <artifactId>spark-cassandra-connector-java_2.11</artifactId>
-            <version>${com.datastax.spark.spark-cassandra-connector-java.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>${postgres.version}</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>jul-to-slf4j</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.kafka</groupId>
-            <artifactId>spring-kafka-test</artifactId>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.maven.plugins</groupId>
@@ -168,7 +41,6 @@
             <type>maven-plugin</type>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -219,6 +91,6 @@
         </com.datastax.spark.spark-cassandra-connector-java.version>
         <maven-assembly-plugin.version>3.6.0</maven-assembly-plugin.version>
         <postgres.version>42.5.4</postgres.version>
-        <start-class>com.lbn.companion.dataprocess.DataprocessApplication</start-class>
+        <start-class>com.lbn.companion.dataprocess.WordCountingApp</start-class>
     </properties>
 </project>

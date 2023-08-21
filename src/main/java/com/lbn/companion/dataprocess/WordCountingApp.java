@@ -1,7 +1,7 @@
 package com.lbn.companion.dataprocess;
 
-import static com.datastax.spark.connector.japi.CassandraJavaUtil.javaFunctions;
-import static com.datastax.spark.connector.japi.CassandraJavaUtil.mapToRow;
+//import static com.datastax.spark.connector.japi.CassandraJavaUtil.javaFunctions;
+//import static com.datastax.spark.connector.japi.CassandraJavaUtil.mapToRow;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -71,8 +71,8 @@ public class WordCountingApp {
                 List<Word> wordList = Arrays.asList(new Word(key, wordCountMap.get(key)));
                 JavaRDD<Word> rdd = streamingContext.sparkContext()
                         .parallelize(wordList);
-                javaFunctions(rdd).writerBuilder("vocabulary", "words", mapToRow(Word.class))
-                        .saveToCassandra();
+               // javaFunctions(rdd).writerBuilder("vocabulary", "words", mapToRow(Word.class))
+                 //       .saveToCassandra();
             }
         });
 
