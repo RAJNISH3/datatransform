@@ -11,8 +11,6 @@ import java.util.Map;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.common.serialization.StringDeserializer;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
@@ -41,8 +39,8 @@ public class DataprocessApplication {
 
     public static void main(String[] args) throws InterruptedException {
 
-        Logger.getLogger("org")
-                .setLevel(Level.OFF);
+//        Logger.getLogger("org")
+//                .setLevel(Level.OFF);
 
         Map<String, Object> kafkaParams = new HashMap<>();
         kafkaParams.put("bootstrap.servers", "localhost:9092");
@@ -56,7 +54,7 @@ public class DataprocessApplication {
 
         SparkConf sparkConf = new SparkConf();
         sparkConf.setMaster("local[2]");
-        sparkConf.setAppName("WordCountingAppWithCheckpoint");
+        sparkConf.setAppName("DataprocessApplication");
         sparkConf.set("spark.cassandra.connection.host", "127.0.0.1");
 
         JavaStreamingContext streamingContext = new JavaStreamingContext(sparkConf, Durations.seconds(1));
@@ -100,5 +98,4 @@ public class DataprocessApplication {
         streamingContext.start();
         streamingContext.awaitTermination();
     }
-
 }
