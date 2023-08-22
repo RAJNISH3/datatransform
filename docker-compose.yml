@@ -1,44 +1,37 @@
 version: '3'
 services:
   zookeeper:
-    image: confluentinc/cp-zookeeper:6.2.0
+    image: "bitnami/zookeeper"
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
     ports:
-      - "2181:2181"
+      - "22181:2181"
 
   kafka:
-    image: confluentinc/cp-kafka:6.2.0
+    image: "bitnami/kafka"
     ports:
       - "9092:9092"
     environment:
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
-      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_ADVERTISED_HOST_NAME=kafka
+      - ALLOW_PLAINTEXT_LISTENER=yes
     depends_on:
       - zookeeper
 
   spark:
-    image: bitnami/spark:3.1.2
+    image: bitnami/spark:3.2.4
     ports:
-      - "4040:4040"
+      - "28080:8080"
     depends_on:
       - kafka
     environment:
-      SPARK_MASTER_URL: spark://spark:7077
-      SPARK_APPLICATION_ARGS: "kafka:9092"
-
-  cassandra:
-    image: cassandra:4.0
-    ports:
-      - "9042:9042"
-
-  java_app:
-    build:
-      context: ./dataprocess/target/
+      - SPARK_MODE=master
+    volumes:
+      - /Users/i070883/Documents/LBNApp/datatransform/target/dataprocess-0.0.1-SNAPSHOT-jar-with-dependencies.jar:/usr/apps/dataprocess.jar
+  spark-worker:
+    image: "bitnami/spark:3.2.4"
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark:7077
     depends_on:
-      - kafka
-    command: [ "java", "-jar", "dataprocess-0.0.1-SNAPSHOT.jar", "" ]
-
-networks:
-  default:
-    external:
-      name: bridge
+      - spark
