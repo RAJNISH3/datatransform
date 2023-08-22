@@ -6,30 +6,26 @@ services:
       - ALLOW_ANONYMOUS_LOGIN=yes
     ports:
       - "22181:2181"
-
   kafka:
     image: "bitnami/kafka"
-    ports:
-      - "9092:9092"
     environment:
       - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
       - KAFKA_ADVERTISED_HOST_NAME=kafka
       - ALLOW_PLAINTEXT_LISTENER=yes
+    ports:
+      - "29092:9092"
     depends_on:
       - zookeeper
-
   spark:
-    image: bitnami/spark:3.2.4
-    ports:
-      - "28080:8080"
-    depends_on:
-      - kafka
+    image: "bitnami/spark"
     environment:
       - SPARK_MODE=master
+    ports:
+      - "28080:8080"
     volumes:
-      - /Users/i070883/Documents/LBNApp/datatransform/target/dataprocess-0.0.1-SNAPSHOT-jar-with-dependencies.jar:/usr/apps/dataprocess.jar
+      - ../Applications/hellospark/target/hellospark-0.0.1-SNAPSHOT-jar-with-dependencies.jar:/usr/apps/hellospark.jar
   spark-worker:
-    image: "bitnami/spark:3.2.4"
+    image: "bitnami/spark"
     environment:
       - SPARK_MODE=worker
       - SPARK_MASTER_URL=spark://spark:7077

@@ -26,6 +26,7 @@ import com.lbn.companion.dataprocess.model.Word;
 
 import scala.Tuple2;
 
+
 public class WordCountingApp {
 
     public static void main(String[] args) throws InterruptedException {
@@ -64,17 +65,27 @@ public class WordCountingApp {
 
         JavaPairDStream<String, Integer> wordCounts = words.mapToPair(s -> new Tuple2<>(s, 1))
                 .reduceByKey((i1, i2) -> i1 + i2);
+        wordCounts.print();
 
-        wordCounts.foreachRDD(javaRdd -> {
-            Map<String, Integer> wordCountMap = javaRdd.collectAsMap();
-            for (String key : wordCountMap.keySet()) {
-                List<Word> wordList = Arrays.asList(new Word(key, wordCountMap.get(key)));
-                JavaRDD<Word> rdd = streamingContext.sparkContext()
-                        .parallelize(wordList);
-               // javaFunctions(rdd).writerBuilder("vocabulary", "words", mapToRow(Word.class))
-                 //       .saveToCassandra();
-            }
-        });
+
+///*        wordCounts.foreachRDD(javaRdd -> {
+//            Map<String, Integer> wordCountMap = javaRdd.collectAsMap();
+//            for (String key : wordCountMap.keySet()) {
+//                List<Word> wordList = Arrays.asList(new Word(key, wordCountMap.get(key)));
+//                JavaRDD<Word> rdd = streamingContext.sparkContext()
+//                        .parallelize(wordList);
+//                System.out.println("test --->"+ wordList.toString());
+//                log.error("-----------------------------------------------------------------");
+//                log.error("-----------------------------------------------------------------");
+//                log.error("-----------------------------------------------------------------");
+//                log.error("-----------------------------------------------------------------");
+//                log.error("-----------------------------------------------------------------");
+//
+//                log.error(wordList.toString());
+//               // javaFunctions(rdd).writerBuilder("vocabulary", "words", mapToRow(Word.class))
+//                 //       .saveToCassandra();
+//            }
+//        });*/
 
         streamingContext.start();
         streamingContext.awaitTermination();
