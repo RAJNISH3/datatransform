@@ -41,3 +41,17 @@ docker exec -it <containerId> /bin/sh
 
 ./bin/spark-submit --class com.lbn.companion.dataprocess.WordCountingApp /usr/apps/dataprocess.jar --master spark://localhost:7077 --deploy-mode cluster
 ```
+
+
+
+## References
+- [Spark Overview](https://spark.apache.org/docs/latest/index.html)
+- [Spark Standalone Mode](https://spark.apache.org/docs/latest/spark-standalone.html)
+- [Spark Streaming + Kafka Integration Guide](https://spark.apache.org/docs/latest/streaming-kafka-0-10-integration.html)
+- [Building a Data Pipeline with Kafka, Spark Streaming and Cassandra](https://www.baeldung.com/kafka-spark-data-pipeline)
+- [Spark setup using Docker](https://hub.docker.com/r/bitnami/spark/)
+
+## Structured Streaming
+- [Structured Streaming Programming Guide](https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html)
+- [Structured Streaming + Kafka Integration Guide](https://spark.apache.org/docs/latest/structured-streaming-kafka-integration.html)
+  
