@@ -16,7 +16,7 @@ docker ps ## To get the container Id
 ```
 Execute the below command to execute the kafka docker image
 ```
-docker docker-compose exec -it <containerId> /bin/sh
+docker exec -it <containerId> /bin/sh
 ```
 ## command to check the available kafka topics, if not avaible then 2nd command needs to executed to create a topic
 ```
@@ -38,7 +38,8 @@ opt/bitnami/kafka/bin/kafka-console-producer.sh --topic messages --bootstrap-ser
 ## Now execute master spark container and submit the jar the spark docker image to stream and receives the kafka topic data
 ```
 docker exec -it <containerId> /bin/sh
-
+```
+```
 ./bin/spark-submit --class com.lbn.companion.dataprocess.WordCountingApp /usr/apps/dataprocess.jar --master spark://localhost:7077 --deploy-mode cluster
 ```
 
