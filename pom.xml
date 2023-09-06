@@ -17,18 +17,35 @@
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-core_2.12</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-sql-kafka-0-10_2.12</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-sql_2.12</artifactId>
+            <version>${spark.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+       <!-- <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-core_2.12</artifactId>
             <version>${org.apache.spark.spark-core.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-streaming_2.12</artifactId>
-            <version>${org.apache.spark.spark-streaming.version}</version>
+            <artifactId>spark-sql_2.12</artifactId>
+            <version>${org.apache.spark.spark-streaming-kafka.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-streaming-kafka-0-10_2.12</artifactId>
+            <artifactId>spark-streaming_2.12</artifactId>
             <version>${org.apache.spark.spark-streaming-kafka.version}</version>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -77,20 +94,11 @@
     </repositories>
 
     <properties>
-        <java.version>11</java.version>
-        <org.apache.spark.spark-core.version>3.3.2</org.apache.spark.spark-core.version>
-        <org.apache.spark.spark-sql.version>3.3.2</org.apache.spark.spark-sql.version>
-        <org.apache.spark.spark-streaming.version>3.3.2</org.apache.spark.spark-streaming.version>
-        <org.apache.spark.spark-mllib.version>3.3.2</org.apache.spark.spark-mllib.version>
-        <org.apache.spark.spark-graphx.version>3.3.2</org.apache.spark.spark-graphx.version>
-        <graphframes.version>0.8.1-spark3.0-s_2.12</graphframes.version>
-        <org.apache.spark.spark-streaming-kafka.version>3.3.2</org.apache.spark.spark-streaming-kafka.version>
-        <com.datastax.spark.spark-cassandra-connector.version>3.3.0
-        </com.datastax.spark.spark-cassandra-connector.version>
-        <com.datastax.spark.spark-cassandra-connector-java.version>1.6.0-M1
-        </com.datastax.spark.spark-cassandra-connector-java.version>
+        <java.version>17</java.version>
+        <spark.version>3.4.1</spark.version>
+        <org.apache.spark.spark-sql.version>3.4.1</org.apache.spark.spark-sql.version>
+        <org.apache.spark.spark-streaming.version>3.4.1</org.apache.spark.spark-streaming.version>
         <maven-assembly-plugin.version>3.6.0</maven-assembly-plugin.version>
-        <postgres.version>42.5.4</postgres.version>
         <start-class>com.lbn.companion.dataprocess.WordCountingApp</start-class>
     </properties>
 </project>
