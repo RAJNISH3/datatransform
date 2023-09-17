@@ -40,7 +40,7 @@ opt/bitnami/kafka/bin/kafka-console-producer.sh --topic messages --bootstrap-ser
 docker exec -it <containerId> /bin/sh
 ```
 ```
-./bin/spark-submit --class com.lbn.companion.dataprocess.WordCountingApp /usr/apps/dataprocess.jar --master spark://localhost:7077 --deploy-mode cluster
+./bin/spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.1 --class com.lbn.companion.dataprocess.WordCountingApp /usr/apps/dataprocess.jar --master spark://localhost:7077 --deploy-mode cluster
 ```
 
 
