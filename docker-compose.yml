@@ -35,3 +35,15 @@ services:
       - SPARK_MASTER_URL=spark://spark:7077
     depends_on:
       - spark
+      - cassandra
+
+  cassandra:
+    image: bitnami/cassandra:latest
+    ports:
+      - '9042:9042' # native protocol clients
+    volumes:
+      - './cassandra_data:/bitnami'
+    environment:
+      - CASSANDRA_USER=cassandra
+      - CASSANDRA_PASS=cassandra
+      - CASSANDRA_CQL_PORT_NUMBER=9042

@@ -32,3 +32,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Casandra file ###
+/Casandra_data/
+/Casandra-data/
+cassandra_data/

@@ -42,7 +42,35 @@ docker exec -it <containerId> /bin/sh
 ```
 ./bin/spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.1 --class com.lbn.companion.dataprocess.WordCountingApp /usr/apps/dataprocess.jar --master spark://localhost:7077 --deploy-mode cluster
 ```
+## now configure the casandra image as mentioned below
+```
+  cassandra:
+    image: bitnami/cassandra:latest
+    ports:
+      - '9042:9042' # native protocol clients
+    volumes:
+      - './cassandra_data:/bitnami'
+    environment:
+      - CASSANDRA_USER=cassandra
+      - CASSANDRA_PASS=cassandra
+      - CASSANDRA_CQL_PORT_NUMBER=9042
 
+```
+### To test the casandra image 
+```
+ docker exec -it <casadra-Id> /bin/sh
+```
+To create login ot cqlsh command 
+```
+cqlsh -u cassandra -p cassandra
+
+DESCRIBE keyspaces; # to check if keyspace exists or not?
+
+CREATE KEYSPACE test WITH REPLICATION = { 'class' : 'NetworkTopologyStrategy', 'datacenter1' : 1 } AND DURABLE_WRITES = false # to create the keyspace
+
+SELECT * FROM system_schema.keyspaces; # to check the keyspace
+
+```
 
 
 ## References
