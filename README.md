@@ -66,9 +66,14 @@ cqlsh -u cassandra -p cassandra
 
 DESCRIBE keyspaces; # to check if keyspace exists or not?
 
-CREATE KEYSPACE test WITH REPLICATION = { 'class' : 'NetworkTopologyStrategy', 'datacenter1' : 1 } AND DURABLE_WRITES = false # to create the keyspace
+CREATE KEYSPACE messages WITH REPLICATION = { 'class' : 'NetworkTopologyStrategy', 'datacenter1' : 1 } AND DURABLE_WRITES = false; # to create the keyspace
 
 SELECT * FROM system_schema.keyspaces; # to check the keyspace
+
+create table messages.test (count text PRIMARY KEY, name text);
+
+DESC tables;
+DESC messages.test; #keyspace_name.table_name 
 
 ```
 
