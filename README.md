@@ -70,7 +70,7 @@ CREATE KEYSPACE messages WITH REPLICATION = { 'class' : 'NetworkTopologyStrategy
 
 SELECT * FROM system_schema.keyspaces; # to check the keyspace
 
-create table messages.test (count text PRIMARY KEY, name text);
+create table messages.test (count text PRIMARY KEY, value text);
 
 DESC tables;
 DESC messages.test; #keyspace_name.table_name 
@@ -88,4 +88,5 @@ DESC messages.test; #keyspace_name.table_name
 ## Structured Streaming
 - [Structured Streaming Programming Guide](https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html)
 - [Structured Streaming + Kafka Integration Guide](https://spark.apache.org/docs/latest/structured-streaming-kafka-integration.html)
+- [cassandra-docker](https://hub.docker.com/r/bitnami/cassandra/)
   

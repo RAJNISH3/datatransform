@@ -1,33 +1,36 @@
 package com.lbn.companion.dataprocess;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.concurrent.TimeoutException;
 
 import org.apache.spark.SparkConf;
-import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.function.FlatMapFunction;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Encoders;
 import org.apache.spark.sql.Row;
-import org.apache.spark.sql.SaveMode;
 import org.apache.spark.sql.SparkSession;
 import org.apache.spark.sql.streaming.OutputMode;
 import org.apache.spark.sql.streaming.StreamingQuery;
 import org.apache.spark.sql.streaming.StreamingQueryException;
-import org.apache.spark.streaming.api.java.JavaDStream;
-import org.apache.spark.streaming.api.java.JavaPairDStream;
 
-import com.lbn.companion.dataprocess.model.Word;
+import com.datastax.spark.connector.cql.DefaultAuthConfFactory;
 
 public class WordCountingApp {
 
         public static void main(String[] args) throws TimeoutException, StreamingQueryException {
 
-                System.out.println("Start of application");
-                SparkSession spark = SparkSession.builder()
-                                .appName("WordCountingApp")
-                                .getOrCreate();
+            System.out.println("Start of application");
+            SparkConf sparkConf = new SparkConf();
+            sparkConf.setMaster("local[2]");
+            sparkConf.setAppName("WordCountingApp");
+            sparkConf.set("spark.cassandra.connection.host", "cassandra");
+            sparkConf.set("spark.cassandra.connection.port", "9042");
+            sparkConf.set("spark.cassandra.connection.localDC","datacenter1");
+
+                    SparkSession spark = SparkSession.builder()
+                            .config(sparkConf)
+                                    .appName("WordCountingApp")
+                                    .getOrCreate();
                 // Create DataSet representing the stream of input lines from kafka
                 Dataset<String> lines = spark.readStream()
                                 .format("kafka")
@@ -46,14 +49,12 @@ public class WordCountingApp {
 
            // CassandraConnector connector = CassandraConnector.apply(spark.sparkContext().getConf());
 
-            SparkConf sparkConf = new SparkConf();
-            sparkConf.setMaster("local[2]");
-            sparkConf.setAppName("WordCountingApp");
-            sparkConf.set("spark.cassandra.connection.host", "127.0.0.1");
-            sparkConf.set("spark.cassandra.connection.port", "9042");
+
+
+
 
            wordCounts.writeStream()
-                 //  .option("checkpointLocation", checkpointDir.toString)
+                   .option("checkpointLocation", "checkpoint")
                    .format("org.apache.spark.sql.cassandra")
                    .option("keyspace", "messages")
                    .option("table", "test")
