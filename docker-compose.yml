@@ -26,6 +26,7 @@ services:
       - kafka
     environment:
       - SPARK_MODE=master
+      - SPARK_MASTER_OPTS="-Dspark.driver.memory=2g -Dspark.executor.memory=2g"
     volumes:
       - /Users/i070883/Documents/LBNApp/datatransform/target/dataprocess-0.0.1-SNAPSHOT-jar-with-dependencies.jar:/usr/apps/dataprocess.jar
   spark-worker:
