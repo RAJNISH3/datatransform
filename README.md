@@ -73,7 +73,9 @@ SELECT * FROM system_schema.keyspaces; # to check the keyspace
 create table messages.test (count int PRIMARY KEY, value text);
 
 DESC tables;
-DESC messages.test; #keyspace_name.table_name 
+DESC messages.test; #keyspace_name.table_name
+insert into messages.test(count, value) values(1, 'time'); # sample insert data
+select * from messages.test;
 
 ```
 
