@@ -34,7 +34,10 @@ opt/bitnami/kafka/bin/kafka-console-consumer.sh --topic messages --bootstrap-ser
 ```
 opt/bitnami/kafka/bin/kafka-console-producer.sh --topic messages --bootstrap-server localhost:9092
 ```
-
+## To delete the Kafka Instance, Execute the below command
+```
+opt/bitnami/kafka/bin/kafka-topics.sh --delete --topic messages --bootstrap-server localhost:9092
+```
 ## Now execute master spark container and submit the jar the spark docker image to stream and receives the kafka topic data
 ```
 docker exec -it <containerId> /bin/sh
