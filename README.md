@@ -5,7 +5,7 @@ data transformation application to run the kafka consumer and producer local set
 1. docker installation ` brew install docker `
 2. docker compose install `brew install docker-compose`
 3. Docker desktop install(since it is paid) or colima tool (command line based) `brew install colima` For more detail refer the [colima setup](https://opensource.com/article/22/9/docker-desktop-colima)
-
+4. Java-17 version
 
 Now Run the docker compose file locally
 
@@ -48,16 +48,9 @@ docker exec -it <containerId> /bin/sh
 ## now configure the casandra image as mentioned below
 ```
   cassandra:
-    image: bitnami/cassandra:latest
+    image: cassandra:latest
     ports:
       - '9042:9042' # native protocol clients
-    volumes:
-      - './cassandra_data:/bitnami'
-    environment:
-      - CASSANDRA_USER=cassandra
-      - CASSANDRA_PASS=cassandra
-      - CASSANDRA_CQL_PORT_NUMBER=9042
-
 ```
 ### To test the casandra image 
 ```
